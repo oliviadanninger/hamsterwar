@@ -44,9 +44,9 @@ router.route('/').get(function (req, res) {
     }
     catch(err){
         console.log('I catch')
-        return res.status(500).send(JSON.stringify({
-            err
-        }));
+        return res.status(500).send(
+           "Från catch" + err
+        );
     }
 });
 
