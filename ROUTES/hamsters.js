@@ -18,28 +18,35 @@ function getQuery(req) {
 
 // HÄMTA ALLA HAMSTRAR
 router.route('/').get(function (req, res) {
-     try{
+    try{
+        console.log('I get')
     db.getDb().collection('hamsters') //connectar
         .find({}) //hämtar collectionen
         .toArray(function (err, result) { //gör om till array
+            console.log('I function nästa')
+            console.log(result)
             if (err) {
                 return res.status(500).send(JSON.stringify({
                     error: 'Internal server error',
                     status: 500
                 }));
             }
+            console.log("Innan result")
             if (result.length == 0) {
                 return res.status(404).send(JSON.stringify({
                     error: 'not found',
                     status: 404
                 }));
             }
-
+            console.log("Innan return")
             return res.json(result)
         })
     }
     catch(err){
-        throw err
+        console.log('I catch')
+        return res.status(500).send(JSON.stringify({
+            err
+        }));
     }
 });
 
