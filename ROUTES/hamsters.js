@@ -18,6 +18,7 @@ function getQuery(req) {
 
 // HÄMTA ALLA HAMSTRAR
 router.route('/').get(function (req, res) {
+     try{
     db.getDb().collection('hamsters') //connectar
         .find({}) //hämtar collectionen
         .toArray(function (err, result) { //gör om till array
@@ -36,6 +37,10 @@ router.route('/').get(function (req, res) {
 
             return res.json(result)
         })
+    }
+    catch(err){
+        throw err
+    }
 });
 
 // HÄMTA EN RANDOM HAMSTER
